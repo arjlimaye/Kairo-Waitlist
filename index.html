@@ -305,8 +305,9 @@ window.KAIRO = {
     return "ok";
   }
 
-  function alreadyJoined(){ try { return localStorage.getItem("kairoJoined") === "1"; } catch (e) { return false; } }
-  function markJoined(){ try { localStorage.setItem("kairoJoined", "1"); } catch (e) {} }
+  function joinedEmail(){ try { return localStorage.getItem("kairoJoinedEmail") || ""; } catch (e) { return ""; } }
+  function sameAsJoined(e){ return !!joinedEmail() && joinedEmail() === e; }
+  function markJoined(e){ try { localStorage.setItem("kairoJoinedEmail", e); } catch (x) {} }
   // Runs only after submitEmail() resolved with a confirmed saved response.
   function allSet(){
     document.querySelectorAll("form[data-waitlist]").forEach(function(x){
@@ -324,13 +325,13 @@ window.KAIRO = {
       e.preventDefault();
       msg.className = "msg";
       if (f.company.value) return; // honeypot
-      if (alreadyJoined()) { msg.className = "msg ok"; msg.textContent = "You're already signed up."; return; }
       var email = f.email.value.trim().toLowerCase();
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { f.email.setAttribute("aria-invalid","true");f.querySelector(".field").classList.add("invalid"); msg.textContent = "Enter a valid email."; msg.classList.add("err"); return; }
+      if (sameAsJoined(email)) { msg.className = "msg ok"; msg.textContent = "You're already signed up."; return; }
       btn.disabled = true; btn.dataset.l=btn.textContent; btn.textContent="Joining..."; msg.textContent = "";
       try {
         var res = await submitEmail(email);
-        markJoined();
+        markJoined(email);
         if (res === "dup") { msg.textContent = "You're already signed up."; msg.classList.add("ok"); }
         else { location.href = "thanks.html"; return; }
       } catch (err) {

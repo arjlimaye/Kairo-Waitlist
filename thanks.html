@@ -37,7 +37,7 @@ p{margin-top:14px;color:var(--mut);font-size:clamp(16px,2.2vw,18px);animation:ok
 </div>
 <script>
 // Only reachable after a successful signup in this browser; otherwise send the visitor to the form.
-try { if (localStorage.getItem("kairoJoined") !== "1") location.replace("index.html#join"); } catch (e) { location.replace("index.html#join"); }
+try { if (!localStorage.getItem("kairoJoinedEmail")) location.replace("index.html#join"); } catch (e) { location.replace("index.html#join"); }
 </script>
 </body>
 </html>
