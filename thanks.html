@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>You're all set | Kairo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--lime:#D7FF45;--fg:#fafafa;--mut:#9a9aa0}
+*{box-sizing:border-box;margin:0}
+body{min-height:100vh;display:grid;place-items:center;background:#000;color:var(--fg);font:400 16px/1.65 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;text-align:center;padding:24px;overflow:hidden}
+body::before{content:"";position:fixed;left:-20%;top:-20%;width:140%;height:140%;z-index:-1;pointer-events:none;background:radial-gradient(closest-side at 30% 35%,rgba(215,255,69,.13),transparent 100%),radial-gradient(closest-side at 72% 62%,rgba(215,255,69,.09),transparent 100%);animation:auraDrift 26s ease-in-out infinite alternate}
+@keyframes auraDrift{0%{transform:translate(0,0)}50%{transform:translate(4%,-3%)}100%{transform:translate(-3%,4%)}}
+.logo{position:absolute;top:28px;left:28px;font:700 21px "Inter Tight",Inter,sans-serif;letter-spacing:-.03em;display:inline-flex;align-items:center;gap:9px}
+.logo svg{width:26px;height:26px}
+.ok-mark{display:block;width:64px;height:64px;margin:0 auto 22px;overflow:visible}
+.ok-mark circle{fill:rgba(215,255,69,.08);stroke:var(--lime);stroke-width:1.6;animation:okring .45s cubic-bezier(.22,1,.36,1) both}
+.ok-mark path{fill:none;stroke:var(--lime);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;animation:okdraw .5s .3s cubic-bezier(.65,0,.35,1) both}
+h1{font:700 clamp(36px,7vw,56px)/1.08 "Inter Tight",Inter,sans-serif;letter-spacing:-.03em;animation:okrise .5s .55s cubic-bezier(.22,1,.36,1) both}
+h1 .x{color:var(--lime)}
+p{margin-top:14px;color:var(--mut);font-size:clamp(16px,2.2vw,18px);animation:okrise .5s .7s cubic-bezier(.22,1,.36,1) both}
+@keyframes okring{from{transform:scale(.6);opacity:0}to{transform:none;opacity:1}}
+@keyframes okdraw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+@keyframes okrise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+<span class="logo"><svg viewBox="58 63 78 78" aria-hidden="true" focusable="false"><rect x="59" y="102" width="17" height="38" rx="6" fill="#695DE8"/><rect x="89" y="81" width="16" height="59" rx="6" fill="#8E9095"/><rect x="118" y="64" width="17" height="76" rx="6" fill="#DFFE68"/></svg>Kairo</span>
+<div>
+<svg class="ok-mark" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30"/><path pathLength="1" d="M20 33.5l8.5 8.5L44.5 24"/></svg>
+<h1>You're all set<span class="x">.</span></h1>
+<p>You'll be first to know when Kairo launches.</p>
+</div>
+<script>
+// Only reachable after a successful signup in this browser; otherwise send the visitor to the form.
+try { if (localStorage.getItem("kairoJoined") !== "1") location.replace("index.html#join"); } catch (e) { location.replace("index.html#join"); }
+</script>
+</body>
+</html>
